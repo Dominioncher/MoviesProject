@@ -11,13 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApplicationDataBase", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieApplicationResources", "MovieApplicationResources\MovieApplicationResources.csproj", "{EF8DF8AC-3E73-4D1A-AD8B-1415686EC4CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
-	ProjectSection(SolutionItems) = preProject
-		Migrations\1.sql = Migrations\1.sql
-		Migrations\2.sql = Migrations\2.sql
-		3.sql = 3.sql
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
