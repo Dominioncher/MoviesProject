@@ -82,10 +82,10 @@
   <ItemGroup>
     <Compile Include="DBAdapter.cs" />
     <Compile Include="ImageHelpers.cs" />
-    <Compile Include="Movies\DBJanres.cs" />
-    <Compile Include="Movies\DBMovie.cs" />
-    <Compile Include="Movies\JanresRepository.cs" />
-    <Compile Include="Movies\MoviesRepository.cs" />
+    <Compile Include="DTO\DBGanres.cs" />
+    <Compile Include="DTO\DBMovie.cs" />
+    <Compile Include="Repositories\JanresRepository.cs" />
+    <Compile Include="Repositories\MoviesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

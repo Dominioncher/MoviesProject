@@ -53,11 +53,15 @@
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.ribbonPage6 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -74,10 +78,6 @@
             this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
-            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
@@ -104,7 +104,7 @@
             this.ribbonControl1.MaxItemId = 16;
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage7});
-            this.ribbonControl1.Size = new System.Drawing.Size(861, 183);
+            this.ribbonControl1.Size = new System.Drawing.Size(861, 211);
             // 
             // ribbonPage1
             // 
@@ -248,30 +248,32 @@
             // 
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanel1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dockPanel1.ID = new System.Guid("6fb0f78e-4d8e-4da0-8641-f7e1e32814ce");
-            this.dockPanel1.Location = new System.Drawing.Point(597, 183);
+            this.dockPanel1.Location = new System.Drawing.Point(565, 211);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.OriginalSize = new System.Drawing.Size(264, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(264, 474);
-            this.dockPanel1.Text = "Images";
+            this.dockPanel1.Options.ShowCloseButton = false;
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(296, 200);
+            this.dockPanel1.Size = new System.Drawing.Size(296, 446);
+            this.dockPanel1.Text = "Photo Gallery";
             // 
             // dockPanel1_Container
             // 
-            this.dockPanel1_Container.Location = new System.Drawing.Point(6, 32);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(6, 39);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(254, 438);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(286, 403);
             this.dockPanel1_Container.TabIndex = 0;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 183);
+            this.gridControl1.Location = new System.Drawing.Point(0, 211);
             this.gridControl1.MainView = this.advBandedGridView1;
             this.gridControl1.MenuManager = this.ribbonControl1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(597, 474);
+            this.gridControl1.Size = new System.Drawing.Size(565, 446);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView1});
@@ -297,7 +299,6 @@
             this.advBandedGridView1.OptionsDetail.EnableMasterViewMode = false;
             this.advBandedGridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.advBandedGridView1.OptionsView.ShowBands = false;
-            this.advBandedGridView1.OptionsView.ShowColumnHeaders = false;
             this.advBandedGridView1.OptionsView.ShowGroupPanel = false;
             this.advBandedGridView1.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
             this.advBandedGridView1.OptionsView.ShowIndicator = false;
@@ -305,27 +306,12 @@
             this.advBandedGridView1.RowHeight = 50;
             this.advBandedGridView1.DoubleClick += new System.EventHandler(this.advBandedGridView1_DoubleClick);
             // 
-            // bandedGridColumn1
+            // gridBand2
             // 
-            this.bandedGridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn1.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn1.Caption = "Title";
-            this.bandedGridColumn1.FieldName = "Title";
-            this.bandedGridColumn1.MinWidth = 25;
-            this.bandedGridColumn1.Name = "bandedGridColumn1";
-            this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 171;
-            // 
-            // bandedGridColumn4
-            // 
-            this.bandedGridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn4.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn4.Caption = "Janres";
-            this.bandedGridColumn4.FieldName = "StrJanres";
-            this.bandedGridColumn4.MinWidth = 25;
-            this.bandedGridColumn4.Name = "bandedGridColumn4";
-            this.bandedGridColumn4.Visible = true;
-            this.bandedGridColumn4.Width = 163;
+            this.gridBand2.Columns.Add(this.bandedGridColumn3);
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 0;
+            this.gridBand2.Width = 144;
             // 
             // bandedGridColumn3
             // 
@@ -345,6 +331,37 @@
             this.repositoryItemPictureEdit1.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.repositoryItemPictureEdit1.ZoomPercent = 80D;
             // 
+            // gridBand1
+            // 
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Columns.Add(this.bandedGridColumn5);
+            this.gridBand1.Columns.Add(this.bandedGridColumn2);
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 1;
+            this.gridBand1.Width = 320;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bandedGridColumn1.AppearanceCell.Options.UseFont = true;
+            this.bandedGridColumn1.Caption = "Title";
+            this.bandedGridColumn1.FieldName = "Title";
+            this.bandedGridColumn1.MinWidth = 25;
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 171;
+            // 
+            // bandedGridColumn5
+            // 
+            this.bandedGridColumn5.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bandedGridColumn5.AppearanceCell.Options.UseFont = true;
+            this.bandedGridColumn5.Caption = "Release";
+            this.bandedGridColumn5.FieldName = "ReleaseDate";
+            this.bandedGridColumn5.MinWidth = 25;
+            this.bandedGridColumn5.Name = "bandedGridColumn5";
+            this.bandedGridColumn5.Visible = true;
+            this.bandedGridColumn5.Width = 149;
+            // 
             // bandedGridColumn2
             // 
             this.bandedGridColumn2.Caption = "Description";
@@ -354,6 +371,25 @@
             this.bandedGridColumn2.RowIndex = 1;
             this.bandedGridColumn2.Visible = true;
             this.bandedGridColumn2.Width = 320;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.Caption = "gridBand3";
+            this.gridBand3.Columns.Add(this.bandedGridColumn4);
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 2;
+            this.gridBand3.Width = 163;
+            // 
+            // bandedGridColumn4
+            // 
+            this.bandedGridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bandedGridColumn4.AppearanceCell.Options.UseFont = true;
+            this.bandedGridColumn4.Caption = "Janres";
+            this.bandedGridColumn4.FieldName = "StrJanres";
+            this.bandedGridColumn4.MinWidth = 25;
+            this.bandedGridColumn4.Name = "bandedGridColumn4";
+            this.bandedGridColumn4.Visible = true;
+            this.bandedGridColumn4.Width = 163;
             // 
             // ribbonPage6
             // 
@@ -463,41 +499,6 @@
             this.barCheckItem1.Caption = "barCheckItem1";
             this.barCheckItem1.Id = 14;
             this.barCheckItem1.Name = "barCheckItem1";
-            // 
-            // bandedGridColumn5
-            // 
-            this.bandedGridColumn5.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn5.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn5.Caption = "Release";
-            this.bandedGridColumn5.FieldName = "ReleaseDate";
-            this.bandedGridColumn5.MinWidth = 25;
-            this.bandedGridColumn5.Name = "bandedGridColumn5";
-            this.bandedGridColumn5.Visible = true;
-            this.bandedGridColumn5.Width = 149;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.Columns.Add(this.bandedGridColumn3);
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.VisibleIndex = 0;
-            this.gridBand2.Width = 144;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.Columns.Add(this.bandedGridColumn1);
-            this.gridBand1.Columns.Add(this.bandedGridColumn5);
-            this.gridBand1.Columns.Add(this.bandedGridColumn2);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 1;
-            this.gridBand1.Width = 320;
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.Caption = "gridBand3";
-            this.gridBand3.Columns.Add(this.bandedGridColumn4);
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 163;
             // 
             // MovieModule
             // 

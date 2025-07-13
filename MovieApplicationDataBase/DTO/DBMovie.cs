@@ -19,9 +19,11 @@ namespace MovieApplicationDataBase.Movies
 
         public DateTime? ReleaseDate { get; set; }
 
-        public List<DBJanres> Janres { get; set; } = new List<DBJanres>();
+        public List<DBGanres> Ganres { get; set; } = new List<DBGanres>();
 
-        public string StrJanres => string.Join(", ", Janres.Select(x => x.Name));
+        public string StrJanres => string.Join(", ", Ganres.Select(x => x.Name));
+
+        public 
 
     }
 }

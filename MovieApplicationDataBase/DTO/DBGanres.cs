@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MovieApplicationDataBase.Movies
 {
-    public class DBJanres
+    public class DBGanres
     {
         public int? ID { get; set; }
 

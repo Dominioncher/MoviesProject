@@ -13,10 +13,10 @@ namespace MovieApplicationDataBase.Movies
 {
     public class JanresRepository
     {
-        public List<DBJanres> GetJanres()
+        public List<DBGanres> GetGanres()
         {
-            var sql = "SELECT * FROM JANRES";
-            var janres = new List<DBJanres>();
+            var sql = "SELECT * FROM GANRES";
+            var janres = new List<DBGanres>();
             using (var connection = DBAdapter.GetDBConnection())
             {
                 connection.Open();
@@ -26,7 +26,7 @@ namespace MovieApplicationDataBase.Movies
                     {
                         while (reader.Read())
                         {
-                            var janre = new DBJanres
+                            var janre = new DBGanres
                             {
                                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                                 Name = reader.GetString(reader.GetOrdinal("Name"))

@@ -45,7 +45,7 @@ namespace MovieApplication.UserControls
             editDescription.EditValue = Movie.Description;
             editImage.EditValue = Movie.Image;
             editReleaseDate.EditValue = Movie.ReleaseDate;
-            editGenre.EditValue = Movie.Janres;
+            editGenre.EditValue = Movie.Ganres;
         }
 
         private void editTitle_EditValueChanged(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace MovieApplication.UserControls
             _presenter.Movie.Description = editDescription.EditValue as string;
             _presenter.Movie.Image = editImage.EditValue as Image;
             _presenter.Movie.ReleaseDate = editReleaseDate.EditValue as DateTime?;
-            _presenter.Movie.Janres = editGenre.EditValue as List<DBJanres>;
+            _presenter.Movie.Ganres = editGenre.EditValue as List<DBGanres>;
             _presenter.UpdateMovie();
         }
 
