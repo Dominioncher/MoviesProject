@@ -1,0 +1,1 @@
+﻿CREATE TYPE ImageListType AS TABLE OF BLOB;

@@ -26,7 +26,7 @@ namespace MovieApplication.Controls
         
         private void LoadImages()
         {
-            _moviesRepository.
+            
         }
     }
 }

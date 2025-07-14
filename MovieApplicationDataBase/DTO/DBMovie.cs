@@ -23,7 +23,5 @@ namespace MovieApplicationDataBase.Movies
 
         public string StrJanres => string.Join(", ", Ganres.Select(x => x.Name));
 
-        public 
-
     }
 }
