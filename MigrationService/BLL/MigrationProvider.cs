@@ -1,51 +1,52 @@
-﻿using MigrationService.DBAdapters;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MigrationService.DB.Adapters;
 using MigrationService.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MigrationService
+namespace MigrationService.BLL
 {
     public class MigrationProvider
     {
-        public bool Purge { get; set; } = false;
+        private IDBAdapter _dbAdapter;
 
-        public string MigrationPath { get; set; }
+        private AppOptions _options;
 
-        private OracleAdapter _dbAdapter;
+        private ILogger _logger;
 
-        public MigrationProvider(OracleAdapter dbAdapter)
+        public MigrationProvider(IDBAdapter dbAdapter, IOptions<AppOptions> options, ILogger<MigrationProvider> logger)
         {
             _dbAdapter = dbAdapter;
+            _options = options.Value;
+            _logger = logger;
         }
 
         public void Migrate()
         {
+            _logger.LogInformation($"Start migrations");
             _dbAdapter.OpenConnection();
 
             // Если запускаем в режиме полной очистки БД
-            if (Purge)
+            if (_options.Purge)
             {
+                _logger.LogInformation("Used purge mode, prepearing for clear DB");
                 _dbAdapter.ClearSchema();
-                ClearInstall();
-                return;
-            }
+                _logger.LogInformation("DB Clear success");
 
+                ClearInstall();
+            }
             // Если запускаем в первый раз
-            var firstInstall = !_dbAdapter.CheckServiceTablesExists();
-            if (firstInstall)
+            else if (!_dbAdapter.CheckServiceTablesExists())
             {
                 ClearInstall();
-                return;
             }
-
             // Если запускаем для добавления новых миграций
-            InstallAdd();
+            else
+            {
+                InstallAdd();
+            }
 
             _dbAdapter.CloseConnection();
+            _logger.LogInformation("All migration sucsessfuly used");
         }
 
 
@@ -62,10 +63,15 @@ namespace MigrationService
             });
             migrations.RemoveRange(0, index + 1);
 
+            _logger.LogInformation($"Current DB migration: {head}");
+            _logger.LogInformation($"Founded {migrations.Count} new migrations");
+
             // Очищаем лог БД от прошлой не успешной миграции
             _dbAdapter.ClearFailedBeforeMigrate();
 
+
             // Применяем новые миграции
+            _logger.LogInformation("Stat execute migrations");
             foreach (var migration in migrations)
             {
                 ExecuteMigration(migration);
@@ -75,8 +81,12 @@ namespace MigrationService
 
         private void ClearInstall()
         {
+            _logger.LogInformation("Create migration tables");
             _dbAdapter.CreateServiceTables();
             var migrations = GetMigrationsFromDirectory();
+
+            _logger.LogInformation($"Founded {migrations.Count} new migrations");
+            _logger.LogInformation("Stat execute migrations");
             foreach (var migration in migrations)
             {
                 ExecuteMigration(migration);
@@ -85,7 +95,7 @@ namespace MigrationService
 
         private List<string> GetMigrationsFromDirectory()
         {
-            var migrations = Directory.GetFiles(MigrationPath, "*.sql", SearchOption.AllDirectories).ToList();
+            var migrations = Directory.GetFiles(_options.MigrationsPath, "*.sql", SearchOption.AllDirectories).ToList();
             migrations.Sort();
             return migrations;
         }

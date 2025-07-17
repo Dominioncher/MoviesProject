@@ -1,57 +1,39 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MigrationService;
-using MigrationService.DBAdapters;
-using Oracle.ManagedDataAccess.Client;
+using MigrationService.BLL;
+using MigrationService.DB.Adapters;
+using MigrationService.DB.Contexts;
+using Serilog;
 using System.Reflection;
-using System.Transactions;
 
+var host = Host.CreateDefaultBuilder()
+            .ConfigureHostConfiguration(configuration =>
+            {
+                configuration.SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+                configuration.AddJsonFile("appsettings.json", false, false);
+                configuration.AddEnvironmentVariables();
+            })
+            .ConfigureServices((context, services) =>
+            {
+                services.Configure<AppOptions>(context.Configuration);
+                services.AddSingleton<App>();
+                services.AddTransient<MigrationProvider>();
+                services.AddLogging(builder => builder.AddSerilog());
 
-IConfigurationBuilder CreateConfigurationBuilder(string[] args)
-{
-    return new ConfigurationBuilder()
-        .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
-        .AddJsonFile("appsettings.json", false, false)
-        .AddEnvironmentVariables();
-}
+                var adapter = context.Configuration.GetValue<string>("DBProvider");
+                switch (adapter)
+                {
+                    case "Oracle":
+                        services.AddTransient<IDBContext, OracleContext>();
+                        services.AddTransient<IDBAdapter, OracleAdapter>();
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .Build();
 
-
-
-
-var configuration = CreateConfigurationBuilder(args).Build();
-var services = new ServiceCollection().BuildServiceProvider();
-
-
-
-void ConfigureServices(IServiceCollection services, Ico)
-{
-    
-}
-
-
-void Run()
-{
-
-}
-
-
-
-var builder = new OracleConnectionStringBuilder();
-builder.UserID = "video_rent";
-builder.Password = "video_rent";
-builder.DataSource = "localhost:1521/XEPDB1";
-var connectionString = builder.ConnectionString;
-
-
-
-var oracleAdapter = new OracleAdapter(new OracleConnection(connectionString));
-
-
-
-var provider = new MigrationProvider(oracleAdapter);
-provider.Purge = true;
-provider.MigrationPath = "C:\\Users\\kushn\\source\\repos\\MovieApplication\\Migrations";
-
-
-provider.Migrate();
-
+var app = host.Services.GetService<App>();
+app?.Run();

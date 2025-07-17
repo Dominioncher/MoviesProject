@@ -1,25 +1,16 @@
-﻿using MigrationService.Exceptions;
+﻿using MigrationService.DB.Contexts;
+using MigrationService.Exceptions;
 using Oracle.ManagedDataAccess.Client;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Common;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
-namespace MigrationService.DBAdapters
+namespace MigrationService.DB.Adapters
 {
-    public class OracleAdapter
+    public class OracleAdapter : IDBAdapter
     {
         private OracleConnection connection;
 
-        public OracleAdapter(OracleConnection connection)
+        public OracleAdapter(IDBContext context)
         {
-            this.connection = connection;
+            connection = new OracleConnection(context.GetConnectionString());
         }
 
 
