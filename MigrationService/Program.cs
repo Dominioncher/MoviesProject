@@ -1,14 +1,39 @@
-﻿using MigrationService;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MigrationService;
 using MigrationService.DBAdapters;
 using Oracle.ManagedDataAccess.Client;
+using System.Reflection;
 using System.Transactions;
 
-var envs = Environment.GetEnvironmentVariables();
 
-//var migrationsPath = envs["path"].ToString();
-//var user = envs["user"].ToString();
-//var password = envs["password"].ToString();
-//var host = envs["host"].ToString();
+IConfigurationBuilder CreateConfigurationBuilder(string[] args)
+{
+    return new ConfigurationBuilder()
+        .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+        .AddJsonFile("appsettings.json", false, false)
+        .AddEnvironmentVariables();
+}
+
+
+
+
+var configuration = CreateConfigurationBuilder(args).Build();
+var services = new ServiceCollection().BuildServiceProvider();
+
+
+
+void ConfigureServices(IServiceCollection services, Ico)
+{
+    
+}
+
+
+void Run()
+{
+
+}
+
 
 
 var builder = new OracleConnectionStringBuilder();
@@ -24,8 +49,9 @@ var oracleAdapter = new OracleAdapter(new OracleConnection(connectionString));
 
 
 var provider = new MigrationProvider(oracleAdapter);
-provider.Prune = true;
+provider.Purge = true;
 provider.MigrationPath = "C:\\Users\\kushn\\source\\repos\\MovieApplication\\Migrations";
 
 
 provider.Migrate();
+

@@ -4,6 +4,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace MigrationService.DBAdapters
             this.connection = connection;
         }
 
+
         public void OpenConnection()
         {
             connection.Open();
@@ -29,6 +32,7 @@ namespace MigrationService.DBAdapters
         {
             connection.Close();
         }
+
 
         public void ClearSchema()
         {
@@ -44,7 +48,8 @@ namespace MigrationService.DBAdapters
                               'FUNCTION',
                               'SEQUENCE',
                               'SYNONYM',
-                              'PACKAGE BODY'
+                              'PACKAGE BODY',
+                              'TYPE'
                              ))
    LOOP
       BEGIN
@@ -89,6 +94,38 @@ END;";
             }
         }
 
+        public void CreateServiceTables()
+        {
+            var transaction = connection.BeginTransaction();
+
+            var sql = "CREATE TABLE MIGRATION_HISTORY (" +
+                "migration VARCHAR2(100) PRIMARY KEY, " +
+                "start_date TIMESTAMP NOT NULL, " +
+                "end_date TIMESTAMP, " +
+                "status NUMBER(1) NOT NULL )";
+            using (var command = new OracleCommand(sql, connection))
+            {
+                command.Transaction = transaction;
+                var created = command.ExecuteNonQuery();
+            }
+
+            var sql2 = "CREATE TABLE MIGRATION_HEAD (head VARCHAR2(100))";
+            using (var command = new OracleCommand(sql2, connection))
+            {
+                command.Transaction = transaction; 
+                var created = command.ExecuteNonQuery();
+            }
+
+            var sql3 = "INSERT INTO MIGRATION_HEAD VALUES( NULL )";            
+            using (var command = new OracleCommand(sql3, connection))
+            {
+                command.Transaction = transaction;
+                var created = command.ExecuteNonQuery();
+            }
+
+            transaction.Commit();
+        }
+
         public bool CheckServiceTablesExists()
         {
             var sql = "Select table_Name from user_Tables Where table_name = 'MIGRATION_HISTORY'";
@@ -105,103 +142,29 @@ END;";
             return false;
         }
 
-        public void CreateServiceTables()
-        {            
-            var sql = "CREATE TABLE MIGRATION_HISTORY (" +
-                "migration VARCHAR2(100) PRIMARY KEY, " +
-                "start_date TIMESTAMP NOT NULL, " +
-                "end_date TIMESTAMP, " +
-                "status NUMBER(1) NOT NULL )";
+
+        public void ClearFailedBeforeMigrate()
+        {
+            var sql = "SELECT migration, end_date FROM MIGRATION_HISTORY WHERE status = 0";
             using (var command = new OracleCommand(sql, connection))
             {
-                var created = command.ExecuteNonQuery();
-            }
-
-            var sql2 = "CREATE TABLE MIGRATION_HEAD (head VARCHAR2(100))";
-            using (var command = new OracleCommand(sql2, connection))
-            {
-                var created = command.ExecuteNonQuery();
-            }
-
-            var sql3 = "INSERT INTO MIGRATION_HEAD VALUES( NULL )";            
-            using (var command = new OracleCommand(sql3, connection))
-            {
-                var created = command.ExecuteNonQuery();
-            }
-        }
-
-        public void StartMigration(string migrationName)
-        {
-            var sqlHistory = $"INSERT INTO Migration_history (migration, start_date, status) VALUES (" +
-            $"'{migrationName}', " +
-            $"'{DateTime.Now}', " +
-            $"0)";
-
-            try
-            {
-                using (var command = new OracleCommand(sqlHistory, connection))
+                using var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    command.ExecuteNonQuery();
-                }
-            }
-            catch (OracleException ex)
-            {
-                if (ex.Number == 900)
-                {
-                    throw new DuplicateMigrationException($"Duplicate migration {migrationName}");
-                }
-
-                throw;
-            }
-        }
-
-        public void ExecuteMigrationQuieries(params string[] quieries)
-        {
-            foreach (var quierie in quieries)
-            {
-                try
-                {
-                    using (var command = new OracleCommand(quierie, connection))
+                    var broken = reader.IsDBNull(reader.GetOrdinal("end_date"));
+                    if (!broken)
                     {
-                        command.ExecuteNonQuery();
+                        continue;
                     }
 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"Quierie failed {quierie}", ex);
+                    var name = reader.GetString(reader.GetOrdinal("migration"));
+                    throw new Exception($"Detected broken migration status for {name} you need manually check changes and change migration status in DB");
                 }
             }
-        }
+            
 
-        public void MigrationSuccess(string migrationName)
-        {
-            var sqlHistory = $"UPDATE Migration_history SET " +
-                $"end_date = '{DateTime.Now}', " +
-                $"status = 1 " +
-                $"WHERE migration = '{migrationName}'";
-
-            using (var command = new OracleCommand(sqlHistory, connection))
-            {
-                command.ExecuteNonQuery();
-            }
-
-            var sqlHead = $"UPDATE MIGRATION_HEAD SET head = '{migrationName}'";
-            using (var command = new OracleCommand(sqlHead, connection))
-            {
-                command.ExecuteNonQuery();
-            }
-
-        }
-
-        public void MigrationFail(string migrationName)
-        {
-            var sql = $"MERGE INTO Migration_history USING dual ON (migration='{migrationName}') " +
-                "WHEN MATCHED THEN UPDATE SET " +
-                $"end_date = '{DateTime.Now}' " +
-                $"WHEN NOT MATCHED THEN INSERT VALUES ('{migrationName}', '{DateTime.Now}', '{DateTime.Now}', 0)";
-
-            using (var command = new OracleCommand(sql, connection))
+            var sql2 = "DELETE FROM MIGRATION_HISTORY WHERE status = 0";
+            using (var command = new OracleCommand(sql2, connection))
             {
                 command.ExecuteNonQuery();
             }
@@ -210,11 +173,102 @@ END;";
         public string GetMigrationsHead()
         {
             var sql = "select * FROM MIGRATION_HEAD";
-            using (var command = new OracleCommand(sql, connection))
+            using var command = new OracleCommand(sql, connection);
+            var head = command.ExecuteScalar();
+            return head?.ToString();
+        }
+
+
+        public void ExecuteMigration(string migrationName, string sql)
+        {
+            try
             {
-                var head = command.ExecuteScalar();
-                return head?.ToString();
+                StartMigrate(migrationName);
             }
+            catch (OracleException ex)
+            {
+                if (ex.Number == 1)
+                {
+                    throw new DuplicateMigrationException();
+                }
+
+                throw;
+            }
+
+            var transaction = connection.BeginTransaction();
+            try
+            {
+                ExecuteQuerie(GetQuerieFromRawSql(sql), transaction);
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                throw;
+            }
+
+            EndMigrate(migrationName, transaction);
+            transaction.Commit();
+        }
+
+        public void LogFail(string migrationName)
+        {
+            var sql = $"MERGE INTO Migration_history USING dual ON (migration='{migrationName}') " +
+                "WHEN MATCHED THEN UPDATE SET " +
+                $"end_date = '{DateTime.Now}' " +
+                $"WHEN NOT MATCHED THEN INSERT VALUES ('{migrationName}', '{DateTime.Now}', '{DateTime.Now}', 0)";
+
+            using var command = new OracleCommand(sql, connection);
+            command.ExecuteNonQuery();
+        }
+
+
+        private void StartMigrate(string migrationName)
+        {
+            var sqlHistory = $"INSERT INTO Migration_history (migration, start_date, status) VALUES (" +
+            $"'{migrationName}', " +
+            $"'{DateTime.Now}', " +
+            $"0)";
+
+            using var command = new OracleCommand(sqlHistory, connection);
+            command.ExecuteNonQuery();
+        }
+
+        private void EndMigrate(string migrationName, OracleTransaction transaction)
+        {
+            var sqlHistory = $"UPDATE Migration_history SET " +
+                $"end_date = '{DateTime.Now}', " +
+                $"status = 1 " +
+                $"WHERE migration = '{migrationName}'";
+            using (var command = new OracleCommand(sqlHistory, connection))
+            {
+                command.Transaction = transaction;
+                command.ExecuteNonQuery();
+            }
+
+            var sqlHead = $"UPDATE MIGRATION_HEAD SET head = '{migrationName}'";
+            using (var command = new OracleCommand(sqlHead, connection))
+            {
+                command.Transaction = transaction;
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void ExecuteQuerie(string querie, OracleTransaction transaction)
+        {
+            using var command = new OracleCommand(querie, connection);
+            command.Transaction = transaction;
+            command.ExecuteNonQuery();
+        }
+
+        private string GetQuerieFromRawSql(string sql)
+        {
+
+            sql = sql.TrimEnd();
+            if (!sql.Contains("begin", StringComparison.CurrentCultureIgnoreCase) && sql.Last() == ';')
+            {
+                sql = sql.Remove(sql.Length - 1, 1);
+            }
+            return sql;
         }
     }
 }

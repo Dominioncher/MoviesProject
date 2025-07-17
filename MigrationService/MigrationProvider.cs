@@ -11,7 +11,7 @@ namespace MigrationService
 {
     public class MigrationProvider
     {
-        public bool Prune { get; set; } = false;
+        public bool Purge { get; set; } = false;
 
         public string MigrationPath { get; set; }
 
@@ -27,14 +27,14 @@ namespace MigrationService
             _dbAdapter.OpenConnection();
 
             // Если запускаем в режиме полной очистки БД
-            if (Prune)
+            if (Purge)
             {
                 _dbAdapter.ClearSchema();
                 ClearInstall();
                 return;
             }
 
-            // Если запускаем в 1 раз
+            // Если запускаем в первый раз
             var firstInstall = !_dbAdapter.CheckServiceTablesExists();
             if (firstInstall)
             {
@@ -48,10 +48,28 @@ namespace MigrationService
             _dbAdapter.CloseConnection();
         }
 
+
         private void InstallAdd()
         {
-            var lastMigrationName = _dbAdapter.GetMigrationsHead();
+
+            // Оставляем только не зафиксированные миграции
+            var head = _dbAdapter.GetMigrationsHead();
             var migrations = GetMigrationsFromDirectory();
+            var index = migrations.FindIndex(x =>
+            {
+                var info = new DirectoryInfo(x);
+                return $"{info.Parent.Name}_{info.Name}" == head;
+            });
+            migrations.RemoveRange(0, index + 1);
+
+            // Очищаем лог БД от прошлой не успешной миграции
+            _dbAdapter.ClearFailedBeforeMigrate();
+
+            // Применяем новые миграции
+            foreach (var migration in migrations)
+            {
+                ExecuteMigration(migration);
+            }
 
         }
 
@@ -74,24 +92,22 @@ namespace MigrationService
 
         private void ExecuteMigration(string path)
         {
-            var quieries = File.ReadAllText(path).Split(";", StringSplitOptions.RemoveEmptyEntries);
+            var sql = File.ReadAllText(path);
             var info = new DirectoryInfo(path);
             var migrationName = $"{info.Parent.Name}_{info.Name}";
 
             try
             {
-                _dbAdapter.StartMigration(migrationName);
-                _dbAdapter.ExecuteMigrationQuieries(quieries);
-                _dbAdapter.MigrationSuccess(migrationName);
+                _dbAdapter.ExecuteMigration(migrationName, sql);
             }
-            catch (DuplicateMigrationException)
+            catch (DuplicateMigrationException ex)
             {
-                _dbAdapter.MigrationFail($"[duplicate]{migrationName}");
-                throw;
+                _dbAdapter.LogFail($"[duplicate]{migrationName}");
+                throw new Exception($"Migration fail {migrationName}", ex);
             }
             catch (Exception ex)
             {
-                _dbAdapter.MigrationFail(migrationName);
+                _dbAdapter.LogFail(migrationName);
                 throw new Exception($"Migration fail {migrationName}", ex);
             }
         }
