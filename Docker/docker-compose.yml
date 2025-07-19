@@ -202,7 +202,7 @@ services:
       - oracle-backup:/opt/oracle/backup  
 
   migrations:
-    image: dominioncher/migrationservice:master
+    image: dominioncher/migrationservice
     environment:
         - DBProvider=Oracle
         - Host=oracle-db:1521/XEPDB1
@@ -210,6 +210,7 @@ services:
         - Password=video_rent
     volumes:
       - ./migrations:/etc/migrations
+
 volumes:
   minio_storage:
   pgdata:
