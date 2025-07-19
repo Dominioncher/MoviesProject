@@ -199,8 +199,17 @@ services:
       - 58769:58769
     volumes:
       - oracle-data:/opt/oracle/oradata
-      - oracle-backup:/opt/oracle/backup
+      - oracle-backup:/opt/oracle/backup  
 
+  migrations:
+    image: dominioncher/migrationservice:master
+    environment:
+        - DBProvider=Oracle
+        - Host=oracle-db:1521/XEPDB1
+        - User=video_rent
+        - Password=video_rent
+    volumes:
+      - ./migrations:/etc/migrations
 volumes:
   minio_storage:
   pgdata:
