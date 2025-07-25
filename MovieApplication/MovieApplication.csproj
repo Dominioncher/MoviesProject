@@ -73,101 +73,102 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ImagePickerControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\ImagePickerControl.Designer.cs">
-      <DependentUpon>ImagePickerControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MoviePhotoGalleryControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MoviePhotoGalleryControl.Designer.cs">
-      <DependentUpon>MoviePhotoGalleryControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\NotificationControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="DTO\Photo.cs" />
-    <Compile Include="EditorsHelper.cs" />
-    <Compile Include="Forms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\TopMoviesModule.cs">
+    <Compile Include="UIComponents\Controls\ImagePickerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\TopMoviesModule.Designer.cs">
+    <Compile Include="UIComponents\Controls\ImagePickerControl.Designer.cs">
+      <DependentUpon>ImagePickerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\Controls\MoviePhotoGalleryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\Controls\MoviePhotoGalleryControl.Designer.cs">
+      <DependentUpon>MoviePhotoGalleryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\Controls\NotificationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DTO\Photo.cs" />
+    <Compile Include="EditorsHelper.cs" />
+    <Compile Include="UIComponents\Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIComponents\Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponents\Modules\TopMoviesModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIComponents\Modules\TopMoviesModule.Designer.cs">
       <DependentUpon>TopMoviesModule.cs</DependentUpon>
     </Compile>
     <Compile Include="NotificationManager.cs" />
     <Compile Include="Presenters\Form1Presenter.cs" />
     <Compile Include="ModulesInfo.cs" />
-    <Compile Include="Modules\BaseModule.cs">
+    <Compile Include="UIComponents\Modules\BaseModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\BaseModule.Designer.cs">
+    <Compile Include="UIComponents\Modules\BaseModule.Designer.cs">
       <DependentUpon>BaseModule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\MovieModule.cs">
+    <Compile Include="UIComponents\Modules\MovieModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\MovieModule.Designer.cs">
+    <Compile Include="UIComponents\Modules\MovieModule.Designer.cs">
       <DependentUpon>MovieModule.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\MoviePhotoGallaryControlPresenter.cs" />
     <Compile Include="Presenters\MovieDetailsPresenter.cs" />
     <Compile Include="Presenters\MovieModulePresenter.cs" />
-    <Compile Include="Modules\RentalsModule.cs">
+    <Compile Include="UIComponents\Modules\RentalsModule.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\RentalsModule.Designer.cs">
+    <Compile Include="UIComponents\Modules\RentalsModule.Designer.cs">
       <DependentUpon>RentalsModule.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\SplashScreen.cs">
+    <Compile Include="UIComponents\Forms\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SplashScreen.Designer.cs">
+    <Compile Include="UIComponents\Forms\SplashScreen.Designer.cs">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Details\BaseDetailsControl.cs">
+    <Compile Include="UIComponents\Details\BaseDetailsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Details\BaseDetailsControl.Designer.cs">
+    <Compile Include="UIComponents\Details\BaseDetailsControl.Designer.cs">
       <DependentUpon>BaseDetailsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Details\MovieDetailsControl.cs">
+    <Compile Include="UIComponents\Details\MovieDetailsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Details\MovieDetailsControl.Designer.cs">
+    <Compile Include="UIComponents\Details\MovieDetailsControl.Designer.cs">
       <DependentUpon>MovieDetailsControl.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Controls\ImagePickerControl.resx">
+    <EmbeddedResource Include="UIComponents\Controls\ImagePickerControl.resx">
       <DependentUpon>ImagePickerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\MoviePhotoGalleryControl.resx">
+    <EmbeddedResource Include="UIComponents\Controls\MoviePhotoGalleryControl.resx">
       <DependentUpon>MoviePhotoGalleryControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
+    <EmbeddedResource Include="UIComponents\Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\BaseModule.resx">
+    <EmbeddedResource Include="UIComponents\Modules\BaseModule.resx">
       <DependentUpon>BaseModule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\MovieModule.resx">
+    <EmbeddedResource Include="UIComponents\Modules\MovieModule.resx">
       <DependentUpon>MovieModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\TopMoviesModule.resx">
+    <EmbeddedResource Include="UIComponents\Modules\TopMoviesModule.resx">
       <DependentUpon>TopMoviesModule.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -181,14 +182,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\SplashScreen.resx">
+    <EmbeddedResource Include="UIComponents\Forms\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Details\BaseDetailsControl.resx">
+    <EmbeddedResource Include="UIComponents\Details\BaseDetailsControl.resx">
       <DependentUpon>BaseDetailsControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Details\MovieDetailsControl.resx">
+    <EmbeddedResource Include="UIComponents\Details\MovieDetailsControl.resx">
       <DependentUpon>MovieDetailsControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DataSet1.xsc">
