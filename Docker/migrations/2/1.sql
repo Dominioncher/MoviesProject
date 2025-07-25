@@ -1,0 +1,7 @@
+ALTER TABLE VIDEO_RENT.MOVIES  
+ADD(
+deleted_date DATE,
+deleted_by VARCHAR2(100),
+created_at DATE DEFAULT SYSDATE,
+updated_at DATE DEFAULT SYSDATE
+);

@@ -1,0 +1,9 @@
+CREATE TABLE MOVIES(
+    Id NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) PRIMARY KEY,
+    Title VARCHAR2(100),
+    Description VARCHAR2(100),
+    Photo BLOB,
+    Release_date DATE,
+    Run_time INTERVAL DAY TO SECOND,
+    Language REFERENCES LANGUAGES (Id)
+);

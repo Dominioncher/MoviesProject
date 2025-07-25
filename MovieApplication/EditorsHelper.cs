@@ -43,15 +43,14 @@ namespace MovieApplication
         public static void FillJanresCheckedComboBox(RepositoryItemCheckedComboBoxEdit edit)
         {
             var repository = new JanresRepository();
-            var janres = repository.GetJanres();
+            var janres = repository.GetGanres();
 
-            FillComboBox(edit, janres, "Name", new KeyComparer<DBJanres>(x => x.ID));
+            FillComboBox(edit, janres, "Name", new KeyComparer<DBGanres>(x => x.ID));
 
         }
 
         private static void FillComboBox<T>(RepositoryItemCheckedComboBoxEdit edit, List<T> dataSource, string DisplayMember, KeyComparer<T> comparer=null) where T : class
-        {
-
+        {           
             edit.EditValueType = EditValueTypeCollection.List;
             edit.EditValueChanging += (sender, e) =>
             {

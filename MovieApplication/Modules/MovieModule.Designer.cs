@@ -51,22 +51,25 @@
             this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanel1 = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
+            this.moviePhotoGalleryControl1 = new MovieApplication.Controls.MoviePhotoGalleryControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bandedGridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.ribbonPage6 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage7 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem9 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem14 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddMovie = new DevExpress.XtraBars.BarButtonItem();
+            this.btnEditMovie = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRemoveMovie = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.barButtonItem10 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem11 = new DevExpress.XtraBars.BarButtonItem();
@@ -74,13 +77,10 @@
             this.barButtonItem12 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem13 = new DevExpress.XtraBars.BarButtonItem();
             this.barCheckItem1 = new DevExpress.XtraBars.BarCheckItem();
-            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.dockPanel1.SuspendLayout();
+            this.dockPanel1_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
@@ -88,23 +88,18 @@
             // 
             // ribbonControl1
             // 
+            this.ribbonControl1.EmptyAreaImageOptions.ImagePadding = new System.Windows.Forms.Padding(50, 47, 50, 47);
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
-            this.barButtonItem5,
-            this.barButtonItem6,
-            this.barButtonItem7,
-            this.barButtonItem8,
-            this.barButtonItem9,
-            this.barButtonItem10,
-            this.barButtonItem11,
-            this.barButtonItem12,
-            this.barButtonItem13,
-            this.barCheckItem1,
-            this.barButtonItem14});
+            this.btnAddMovie,
+            this.btnEditMovie,
+            this.btnRemoveMovie});
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(5);
             this.ribbonControl1.MaxItemId = 16;
+            this.ribbonControl1.OptionsMenuMinWidth = 545;
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage7});
-            this.ribbonControl1.Size = new System.Drawing.Size(861, 183);
+            this.ribbonControl1.Size = new System.Drawing.Size(1426, 260);
             // 
             // ribbonPage1
             // 
@@ -248,30 +243,47 @@
             // 
             this.dockPanel1.Controls.Add(this.dockPanel1_Container);
             this.dockPanel1.Dock = DevExpress.XtraBars.Docking.DockingStyle.Right;
+            this.dockPanel1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dockPanel1.ID = new System.Guid("6fb0f78e-4d8e-4da0-8641-f7e1e32814ce");
-            this.dockPanel1.Location = new System.Drawing.Point(597, 183);
+            this.dockPanel1.Location = new System.Drawing.Point(878, 260);
+            this.dockPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1.Name = "dockPanel1";
-            this.dockPanel1.OriginalSize = new System.Drawing.Size(264, 200);
-            this.dockPanel1.Size = new System.Drawing.Size(264, 474);
-            this.dockPanel1.Text = "Images";
+            this.dockPanel1.Options.ShowCloseButton = false;
+            this.dockPanel1.OriginalSize = new System.Drawing.Size(548, 200);
+            this.dockPanel1.Size = new System.Drawing.Size(548, 524);
+            this.dockPanel1.Text = "Photo Gallery";
             // 
             // dockPanel1_Container
             // 
-            this.dockPanel1_Container.Location = new System.Drawing.Point(6, 32);
+            this.dockPanel1_Container.Controls.Add(this.moviePhotoGalleryControl1);
+            this.dockPanel1_Container.Location = new System.Drawing.Point(7, 47);
+            this.dockPanel1_Container.Margin = new System.Windows.Forms.Padding(4);
             this.dockPanel1_Container.Name = "dockPanel1_Container";
-            this.dockPanel1_Container.Size = new System.Drawing.Size(254, 438);
+            this.dockPanel1_Container.Size = new System.Drawing.Size(537, 473);
             this.dockPanel1_Container.TabIndex = 0;
+            // 
+            // moviePhotoGalleryControl1
+            // 
+            this.moviePhotoGalleryControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moviePhotoGalleryControl1.Location = new System.Drawing.Point(0, 0);
+            this.moviePhotoGalleryControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.moviePhotoGalleryControl1.MovieID = 0;
+            this.moviePhotoGalleryControl1.Name = "moviePhotoGalleryControl1";
+            this.moviePhotoGalleryControl1.Size = new System.Drawing.Size(537, 473);
+            this.moviePhotoGalleryControl1.TabIndex = 0;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 183);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.gridControl1.Location = new System.Drawing.Point(0, 260);
             this.gridControl1.MainView = this.advBandedGridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.MenuManager = this.ribbonControl1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(597, 474);
+            this.gridControl1.Size = new System.Drawing.Size(878, 524);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView1});
@@ -287,56 +299,44 @@
             this.advBandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.bandedGridColumn1,
             this.bandedGridColumn2,
-            this.bandedGridColumn3,
-            this.bandedGridColumn4,
-            this.bandedGridColumn5});
+            this.bandedGridColumn3});
+            this.advBandedGridView1.DetailHeight = 437;
             this.advBandedGridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.advBandedGridView1.GridControl = this.gridControl1;
             this.advBandedGridView1.Name = "advBandedGridView1";
             this.advBandedGridView1.OptionsBehavior.Editable = false;
             this.advBandedGridView1.OptionsDetail.EnableMasterViewMode = false;
+            this.advBandedGridView1.OptionsEditForm.PopupEditFormWidth = 1029;
+            this.advBandedGridView1.OptionsFind.SearchInPreview = true;
             this.advBandedGridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.advBandedGridView1.OptionsView.ColumnAutoWidth = true;
             this.advBandedGridView1.OptionsView.ShowBands = false;
-            this.advBandedGridView1.OptionsView.ShowColumnHeaders = false;
             this.advBandedGridView1.OptionsView.ShowGroupPanel = false;
             this.advBandedGridView1.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
             this.advBandedGridView1.OptionsView.ShowIndicator = false;
             this.advBandedGridView1.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
-            this.advBandedGridView1.RowHeight = 50;
+            this.advBandedGridView1.RowHeight = 62;
+            this.advBandedGridView1.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.advBandedGridView1_FocusedRowObjectChanged);
             this.advBandedGridView1.DoubleClick += new System.EventHandler(this.advBandedGridView1_DoubleClick);
             // 
-            // bandedGridColumn1
+            // gridBand2
             // 
-            this.bandedGridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn1.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn1.Caption = "Title";
-            this.bandedGridColumn1.FieldName = "Title";
-            this.bandedGridColumn1.MinWidth = 25;
-            this.bandedGridColumn1.Name = "bandedGridColumn1";
-            this.bandedGridColumn1.Visible = true;
-            this.bandedGridColumn1.Width = 171;
-            // 
-            // bandedGridColumn4
-            // 
-            this.bandedGridColumn4.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn4.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn4.Caption = "Janres";
-            this.bandedGridColumn4.FieldName = "StrJanres";
-            this.bandedGridColumn4.MinWidth = 25;
-            this.bandedGridColumn4.Name = "bandedGridColumn4";
-            this.bandedGridColumn4.Visible = true;
-            this.bandedGridColumn4.Width = 163;
+            this.gridBand2.Columns.Add(this.bandedGridColumn3);
+            this.gridBand2.MinWidth = 13;
+            this.gridBand2.Name = "gridBand2";
+            this.gridBand2.VisibleIndex = 0;
+            this.gridBand2.Width = 201;
             // 
             // bandedGridColumn3
             // 
             this.bandedGridColumn3.Caption = "Photo";
             this.bandedGridColumn3.ColumnEdit = this.repositoryItemPictureEdit1;
             this.bandedGridColumn3.FieldName = "Image";
-            this.bandedGridColumn3.MinWidth = 25;
+            this.bandedGridColumn3.MinWidth = 32;
             this.bandedGridColumn3.Name = "bandedGridColumn3";
             this.bandedGridColumn3.RowCount = 2;
             this.bandedGridColumn3.Visible = true;
-            this.bandedGridColumn3.Width = 144;
+            this.bandedGridColumn3.Width = 201;
             // 
             // repositoryItemPictureEdit1
             // 
@@ -345,15 +345,43 @@
             this.repositoryItemPictureEdit1.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.repositoryItemPictureEdit1.ZoomPercent = 80D;
             // 
+            // gridBand1
+            // 
+            this.gridBand1.Columns.Add(this.bandedGridColumn1);
+            this.gridBand1.Columns.Add(this.bandedGridColumn2);
+            this.gridBand1.MinWidth = 13;
+            this.gridBand1.Name = "gridBand1";
+            this.gridBand1.VisibleIndex = 1;
+            this.gridBand1.Width = 347;
+            // 
+            // bandedGridColumn1
+            // 
+            this.bandedGridColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.bandedGridColumn1.AppearanceCell.Options.UseFont = true;
+            this.bandedGridColumn1.Caption = "Title";
+            this.bandedGridColumn1.FieldName = "Title";
+            this.bandedGridColumn1.MinWidth = 32;
+            this.bandedGridColumn1.Name = "bandedGridColumn1";
+            this.bandedGridColumn1.Visible = true;
+            this.bandedGridColumn1.Width = 347;
+            // 
             // bandedGridColumn2
             // 
             this.bandedGridColumn2.Caption = "Description";
             this.bandedGridColumn2.FieldName = "Description";
-            this.bandedGridColumn2.MinWidth = 25;
+            this.bandedGridColumn2.MinWidth = 32;
             this.bandedGridColumn2.Name = "bandedGridColumn2";
             this.bandedGridColumn2.RowIndex = 1;
             this.bandedGridColumn2.Visible = true;
-            this.bandedGridColumn2.Width = 320;
+            this.bandedGridColumn2.Width = 347;
+            // 
+            // gridBand3
+            // 
+            this.gridBand3.Caption = "gridBand3";
+            this.gridBand3.MinWidth = 13;
+            this.gridBand3.Name = "gridBand3";
+            this.gridBand3.VisibleIndex = 2;
+            this.gridBand3.Width = 328;
             // 
             // ribbonPage6
             // 
@@ -386,38 +414,40 @@
             // 
             // ribbonPageGroup10
             // 
-            this.ribbonPageGroup10.ItemLinks.Add(this.barButtonItem8);
-            this.ribbonPageGroup10.ItemLinks.Add(this.barButtonItem9);
-            this.ribbonPageGroup10.ItemLinks.Add(this.barButtonItem14);
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnAddMovie);
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnEditMovie);
+            this.ribbonPageGroup10.ItemLinks.Add(this.btnRemoveMovie);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.Text = "Movies Records Managment";
             // 
-            // barButtonItem8
+            // btnAddMovie
             // 
-            this.barButtonItem8.Caption = "Add";
-            this.barButtonItem8.Id = 8;
-            this.barButtonItem8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.Image")));
-            this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
-            this.barButtonItem8.Name = "barButtonItem8";
-            this.barButtonItem8.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
+            this.btnAddMovie.Caption = "Add";
+            this.btnAddMovie.Id = 8;
+            this.btnAddMovie.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddMovie.ImageOptions.Image")));
+            this.btnAddMovie.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAddMovie.ImageOptions.LargeImage")));
+            this.btnAddMovie.Name = "btnAddMovie";
+            this.btnAddMovie.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem8_ItemClick);
             // 
-            // barButtonItem9
+            // btnEditMovie
             // 
-            this.barButtonItem9.Caption = "Edit";
-            this.barButtonItem9.Id = 9;
-            this.barButtonItem9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.Image")));
-            this.barButtonItem9.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem9.ImageOptions.LargeImage")));
-            this.barButtonItem9.Name = "barButtonItem9";
-            this.barButtonItem9.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
+            this.btnEditMovie.Caption = "Edit";
+            this.btnEditMovie.Enabled = false;
+            this.btnEditMovie.Id = 9;
+            this.btnEditMovie.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnEditMovie.ImageOptions.Image")));
+            this.btnEditMovie.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnEditMovie.ImageOptions.LargeImage")));
+            this.btnEditMovie.Name = "btnEditMovie";
+            this.btnEditMovie.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem9_ItemClick);
             // 
-            // barButtonItem14
+            // btnRemoveMovie
             // 
-            this.barButtonItem14.Caption = "Remove";
-            this.barButtonItem14.Id = 15;
-            this.barButtonItem14.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.Image")));
-            this.barButtonItem14.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem14.ImageOptions.LargeImage")));
-            this.barButtonItem14.Name = "barButtonItem14";
-            this.barButtonItem14.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem14_ItemClick);
+            this.btnRemoveMovie.Caption = "Remove";
+            this.btnRemoveMovie.Enabled = false;
+            this.btnRemoveMovie.Id = 15;
+            this.btnRemoveMovie.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRemoveMovie.ImageOptions.Image")));
+            this.btnRemoveMovie.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnRemoveMovie.ImageOptions.LargeImage")));
+            this.btnRemoveMovie.Name = "btnRemoveMovie";
+            this.btnRemoveMovie.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem14_ItemClick);
             // 
             // ribbonPageGroup11
             // 
@@ -464,55 +494,22 @@
             this.barCheckItem1.Id = 14;
             this.barCheckItem1.Name = "barCheckItem1";
             // 
-            // bandedGridColumn5
-            // 
-            this.bandedGridColumn5.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bandedGridColumn5.AppearanceCell.Options.UseFont = true;
-            this.bandedGridColumn5.Caption = "Release";
-            this.bandedGridColumn5.FieldName = "ReleaseDate";
-            this.bandedGridColumn5.MinWidth = 25;
-            this.bandedGridColumn5.Name = "bandedGridColumn5";
-            this.bandedGridColumn5.Visible = true;
-            this.bandedGridColumn5.Width = 149;
-            // 
-            // gridBand2
-            // 
-            this.gridBand2.Columns.Add(this.bandedGridColumn3);
-            this.gridBand2.Name = "gridBand2";
-            this.gridBand2.VisibleIndex = 0;
-            this.gridBand2.Width = 144;
-            // 
-            // gridBand1
-            // 
-            this.gridBand1.Columns.Add(this.bandedGridColumn1);
-            this.gridBand1.Columns.Add(this.bandedGridColumn5);
-            this.gridBand1.Columns.Add(this.bandedGridColumn2);
-            this.gridBand1.Name = "gridBand1";
-            this.gridBand1.VisibleIndex = 1;
-            this.gridBand1.Width = 320;
-            // 
-            // gridBand3
-            // 
-            this.gridBand3.Caption = "gridBand3";
-            this.gridBand3.Columns.Add(this.bandedGridColumn4);
-            this.gridBand3.Name = "gridBand3";
-            this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 163;
-            // 
             // MovieModule
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.dockPanel1);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MovieModule";
-            this.Size = new System.Drawing.Size(861, 657);
+            this.Size = new System.Drawing.Size(1426, 784);
             this.Controls.SetChildIndex(this.ribbonControl1, 0);
             this.Controls.SetChildIndex(this.dockPanel1, 0);
             this.Controls.SetChildIndex(this.gridControl1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.dockPanel1.ResumeLayout(false);
+            this.dockPanel1_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
@@ -549,8 +546,8 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup9;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem8;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem9;
+        private DevExpress.XtraBars.BarButtonItem btnAddMovie;
+        private DevExpress.XtraBars.BarButtonItem btnEditMovie;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage7;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup10;
         private DevExpress.XtraBars.BarButtonItem barButtonItem10;
@@ -563,13 +560,12 @@
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridView1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem14;
+        private DevExpress.XtraBars.BarButtonItem btnRemoveMovie;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn3;
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn4;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand3;
+        private Controls.MoviePhotoGalleryControl moviePhotoGalleryControl1;
     }
 }

@@ -1,5 +1,7 @@
-﻿using DevExpress.Utils;
+﻿using DevExpress.DXTemplateGallery.Extensions;
+using DevExpress.Utils;
 using DevExpress.XtraBars;
+using DevExpress.XtraBars.Alerter;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraNavBar;
@@ -25,12 +27,18 @@ namespace MovieApplication
         public Form1()
         {
             InitializeComponent();
+            notificationControl1.Initialize(this);
         }
 
         public void RefreshModule()
         {
             ShowModuleMenu(); 
             ShowModuleContent();
+        }
+
+        public void ShowNotification(string text)
+        {
+            notificationControl1.Show(this, "Ошибка", text);
         }
 
         #region UI event Handlers
@@ -64,14 +72,18 @@ namespace MovieApplication
 
         private void ribbonControl1_Merge(object sender, DevExpress.XtraBars.Ribbon.RibbonMergeEventArgs e)
         {
-            //var ribbon = (sender as RibbonControl);
-            //BeginInvoke(new Action(() =>
-            //{
-            //    if (ribbon.MergedPages.Count > 0)
-            //    {
-            //        ribbon.SelectedPage = presenter.CurrentModule.ActivePage;
-            //    }
-            //}));
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {            
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+        }
+
+        private void alertControl1_BeforeFormShow(object sender, DevExpress.XtraBars.Alerter.AlertFormEventArgs e)
+        {
         }
 
         #endregion

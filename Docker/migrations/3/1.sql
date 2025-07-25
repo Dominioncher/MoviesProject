@@ -1,0 +1,4 @@
+﻿CREATE TABLE MOVIES_IMAGES(
+	Movie_id NUMBER REFERENCES MOVIES (Id),
+	Image_guid RAW(16)
+)

@@ -1,4 +1,6 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using MovieApplicationDataBase.Repositories;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,9 +15,16 @@ namespace MovieApplicationDataBase.Movies
 {
     public class MoviesRepository
     {
-        public List<DBMovie> GetAllMovies()
+        ObjectsRepository _objectsRepository;
+
+        public MoviesRepository()
         {
-            var sql = "SELECT * FROM MOVIES_VIEW";
+            _objectsRepository = new ObjectsRepository();
+        }
+
+        public List<DBMovie> GetAllMovies(int offset, int batchSize)
+        {
+            var sql = $"SELECT * FROM MOVIES_VIEW ORDER BY Title OFFSET {offset} ROWS FETCH NEXT {batchSize} ROWS ONLY";
             var movies = new List<DBMovie>();
             using (var connection = DBAdapter.GetDBConnection())
             {
@@ -53,9 +62,9 @@ namespace MovieApplicationDataBase.Movies
                     return movies;
                 }
 
-                // Load Movies Janres
-                var janresSQL = $"SELECT * FROM MOVIES_JANRES JOIN JANRES ON (MOVIES_JANRES.JANRE_ID = JANRES.ID) WHERE MOVIE_ID IN ({string.Join(", ", movies.Select(x => x.ID))})";
-                using (var command = new OracleCommand(janresSQL, connection))
+                // Load Movies Ganres
+                var ganresSQL = $"SELECT * FROM MOVIES_GANRES JOIN GANRES ON (MOVIES_GANRES.GANRE_ID = GANRES.ID) WHERE MOVIE_ID IN ({string.Join(", ", movies.Select(x => x.ID))})";
+                using (var command = new OracleCommand(ganresSQL, connection))
                 {
                     command.Transaction = transaction;
                     using (var reader = command.ExecuteReader())
@@ -65,12 +74,12 @@ namespace MovieApplicationDataBase.Movies
                         {
                             var movieID = reader.GetInt32(reader.GetOrdinal("Movie_id"));
 
-                            var janre = new DBJanres
+                            var ganre = new DBGanres
                             {
                                 ID = reader.GetInt32(reader.GetOrdinal("ID")),
                                 Name = reader.GetString(reader.GetOrdinal("Name")),
                             };
-                            movies.First(x => x.ID == movieID).Janres.Add(janre);
+                            movies.First(x => x.ID == movieID).Ganres.Add(ganre);
                         }
                     }
                 }
@@ -78,6 +87,76 @@ namespace MovieApplicationDataBase.Movies
             }
             
             return movies;
+        }
+
+        public List<Guid> GetMovieImages(int MovieID)
+        {
+            var sql = $"SELECT Image_guid FROM MOVIES_IMAGES WHERE movie_id = {MovieID}";
+            var ids = new List<Guid>();
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ids.Add(new Guid(reader.GetOracleBinary(reader.GetOrdinal("Image_guid")).Value));
+                        }
+                    }
+                }
+            }
+
+            return ids;
+        }
+
+
+        public int CreateMovie(string title)
+        {
+            var sql = "INSERT INTO MOVIES_VIEW " +
+                     "(TITLE) " +
+                     "VALUES (:title) " +
+                     "returning ID into :result";
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    var parameters = new OracleParameter[] {
+                     new OracleParameter("title", title),
+                     new OracleParameter("result", OracleDbType.Decimal, System.Data.ParameterDirection.ReturnValue)
+                    };
+                    command.Parameters.AddRange(parameters);
+                    var inserted = command.ExecuteNonQuery();
+                    return (int)((OracleDecimal)command.Parameters["result"].Value).Value;
+                }
+            }
+        }
+
+        public void AddMovieImages(int MovieID, List<Guid> images)
+        {
+            var sql = $"insert into MOVIES_IMAGES values(:movie, :image)";
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                var transaction = connection.BeginTransaction();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    command.Transaction = transaction;
+                    foreach (var image in images)
+                    {
+                        var parameters = new OracleParameter[] {
+                         new OracleParameter("movie", MovieID),
+                         new OracleParameter("image", OracleDbType.Raw, 16, image, System.Data.ParameterDirection.Input)
+                        };
+                        command.Parameters.Clear();
+                        command.Parameters.AddRange(parameters);
+                        var inserted = command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+            }
         }
 
         public void IncreaceMovieView(int MovieID)
@@ -109,8 +188,8 @@ namespace MovieApplicationDataBase.Movies
                 "PHOTO = :photo, " +
                 "RELEASE_DATE = :release " +
                 $"WHERE ID = {movie.ID}";
-            var deleteJanres = "DELETE FROM MOVIES_JANRES WHERE Movie_id = :id ";
-            var insertJanres = "INSERT INTO MOVIES_JANRES VALUES (:id, :janre_id)";
+            var deleteJanres = "DELETE FROM MOVIES_GANRES WHERE Movie_id = :id ";
+            var insertJanres = "INSERT INTO MOVIES_GANRES VALUES (:id, :janre_id)";
 
             using (var connection = DBAdapter.GetDBConnection())
             {
@@ -142,7 +221,7 @@ namespace MovieApplicationDataBase.Movies
                 }
 
                 // Insert new Janres
-                foreach (var janre in movie.Janres)
+                foreach (var janre in movie.Ganres)
                 {                    
                     using (var command = new OracleCommand(insertJanres, connection))
                     {
@@ -160,25 +239,6 @@ namespace MovieApplicationDataBase.Movies
             }
         }
 
-        public void CreateMovie(DBMovie movie)
-        {
-            var sql = "INSERT INTO MOVIES_VIEW " +
-                    "(TITLE, DESCRIPTION) " +
-                     "VALUES (:title, :description)";
-            using (var connection = DBAdapter.GetDBConnection())
-            {
-                connection.Open();
-                using (var command = new OracleCommand(sql, connection))
-                {
-                    var parameters = new OracleParameter[] {
-                     new OracleParameter("title", movie.Title),
-                     new OracleParameter("description", movie.Description)
-                    };
-                    command.Parameters.AddRange(parameters);
-                    var inserted = command.ExecuteNonQuery();
-                }
-            }
-        }
 
         public void RemoveMovie(int MovieID)
         {
@@ -197,6 +257,11 @@ namespace MovieApplicationDataBase.Movies
                     var deleted = command.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void RemoveMovieImages(int MovieID, List<Guid> images)
+        {
+
         }
     }
 }
