@@ -1,4 +1,6 @@
-﻿using Oracle.ManagedDataAccess.Client;
+﻿using MovieApplicationDataBase.Repositories;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -13,9 +15,16 @@ namespace MovieApplicationDataBase.Movies
 {
     public class MoviesRepository
     {
-        public List<DBMovie> GetAllMovies()
+        ObjectsRepository _objectsRepository;
+
+        public MoviesRepository()
         {
-            var sql = "SELECT * FROM MOVIES_VIEW";
+            _objectsRepository = new ObjectsRepository();
+        }
+
+        public List<DBMovie> GetAllMovies(int offset, int batchSize)
+        {
+            var sql = $"SELECT * FROM MOVIES_VIEW ORDER BY Title OFFSET {offset} ROWS FETCH NEXT {batchSize} ROWS ONLY";
             var movies = new List<DBMovie>();
             using (var connection = DBAdapter.GetDBConnection())
             {
@@ -78,6 +87,76 @@ namespace MovieApplicationDataBase.Movies
             }
             
             return movies;
+        }
+
+        public List<Guid> GetMovieImages(int MovieID)
+        {
+            var sql = $"SELECT Image_guid FROM MOVIES_IMAGES WHERE movie_id = {MovieID}";
+            var ids = new List<Guid>();
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ids.Add(new Guid(reader.GetOracleBinary(reader.GetOrdinal("Image_guid")).Value));
+                        }
+                    }
+                }
+            }
+
+            return ids;
+        }
+
+
+        public int CreateMovie(string title)
+        {
+            var sql = "INSERT INTO MOVIES_VIEW " +
+                     "(TITLE) " +
+                     "VALUES (:title) " +
+                     "returning ID into :result";
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    var parameters = new OracleParameter[] {
+                     new OracleParameter("title", title),
+                     new OracleParameter("result", OracleDbType.Decimal, System.Data.ParameterDirection.ReturnValue)
+                    };
+                    command.Parameters.AddRange(parameters);
+                    var inserted = command.ExecuteNonQuery();
+                    return (int)((OracleDecimal)command.Parameters["result"].Value).Value;
+                }
+            }
+        }
+
+        public void AddMovieImages(int MovieID, List<Guid> images)
+        {
+            var sql = $"insert into MOVIES_IMAGES values(:movie, :image)";
+            using (var connection = DBAdapter.GetDBConnection())
+            {
+                connection.Open();
+                var transaction = connection.BeginTransaction();
+                using (var command = new OracleCommand(sql, connection))
+                {
+                    command.Transaction = transaction;
+                    foreach (var image in images)
+                    {
+                        var parameters = new OracleParameter[] {
+                         new OracleParameter("movie", MovieID),
+                         new OracleParameter("image", OracleDbType.Raw, 16, image, System.Data.ParameterDirection.Input)
+                        };
+                        command.Parameters.Clear();
+                        command.Parameters.AddRange(parameters);
+                        var inserted = command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+            }
         }
 
         public void IncreaceMovieView(int MovieID)
@@ -160,25 +239,6 @@ namespace MovieApplicationDataBase.Movies
             }
         }
 
-        public void CreateMovie(DBMovie movie)
-        {
-            var sql = "INSERT INTO MOVIES_VIEW " +
-                    "(TITLE, DESCRIPTION) " +
-                     "VALUES (:title, :description)";
-            using (var connection = DBAdapter.GetDBConnection())
-            {
-                connection.Open();
-                using (var command = new OracleCommand(sql, connection))
-                {
-                    var parameters = new OracleParameter[] {
-                     new OracleParameter("title", movie.Title),
-                     new OracleParameter("description", movie.Description)
-                    };
-                    command.Parameters.AddRange(parameters);
-                    var inserted = command.ExecuteNonQuery();
-                }
-            }
-        }
 
         public void RemoveMovie(int MovieID)
         {
@@ -199,24 +259,7 @@ namespace MovieApplicationDataBase.Movies
             }
         }
 
-        public void AddMovieImage(int MovieID, Image image)
-        {
-            var sql = $"insert into table(select IMAGES from MOVIES_VIEW where id = {MovieID}) values(:image);";
-            using (var connection = DBAdapter.GetDBConnection())
-            {
-                connection.Open();
-                using (var command = new OracleCommand(sql, connection))
-                {
-                    var parameters = new OracleParameter[] {
-                     new OracleParameter("image",image.ToByteArray())
-                    };
-                    command.Parameters.AddRange(parameters);
-                    var inserted = command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void RemoveMovieImage(int MovieID, Image image)
+        public void RemoveMovieImages(int MovieID, List<Guid> images)
         {
 
         }

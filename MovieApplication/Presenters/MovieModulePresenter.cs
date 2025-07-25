@@ -28,9 +28,6 @@ namespace MovieApplication.Modules
 
         public void LoadMovies()
         {
-            //Movies = _repository.GetAllMovies();
-            //var topMovies = _repository.GetTop5Movies();
-
             Movies = new VirtualServerModeSource
             {
                 RowType = typeof(DBMovie)
@@ -53,9 +50,9 @@ namespace MovieApplication.Modules
             e.UserData = GetMovies(0);
         }
 
-        private List<DBMovie> GetMovies(int index)
+        private List<DBMovie> GetMovies(int offset)
         {
-            return _repository.GetAllMovies();
+            return _repository.GetAllMovies(offset, 10);
         }
 
         public void ShowEditForm(object movie)
@@ -76,6 +73,7 @@ namespace MovieApplication.Modules
         {
             var id = (int)(movie as DBMovie).ID;
             _repository.RemoveMovie(id);
+            Movies.Refresh();            
         }
 
         #endregion

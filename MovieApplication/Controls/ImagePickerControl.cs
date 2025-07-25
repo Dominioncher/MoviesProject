@@ -35,9 +35,10 @@ namespace MovieApplication.Controls
                 {
                     var image = Image.FromFile(openFileDialog.FileName);
                     pictureEdit1.Image = image.Resize(new Size(400, 400));
+                    image.Dispose();
+                    GC.Collect();
                 }
             }
-            GC.Collect();
         }
 
         private void barButtonItem2_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

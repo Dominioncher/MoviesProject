@@ -29,9 +29,9 @@ namespace MovieApplication.Modules
         {
             if (Movie.ID == null)
             {
-                _repository.CreateMovie(Movie);
-                return;
+                Movie.ID = _repository.CreateMovie(Movie.Title);
             }
+
             _repository.UpdateMovie(Movie);
         }
 

@@ -20,10 +20,14 @@ namespace MovieApplicationDataBase
                 return null;
             }
 
+            Image image = null;
             using (var ms = new MemoryStream(bytes))
             {
-                return Image.FromStream(ms);
+                var buffer = Image.FromStream(ms);
+                image = new Bitmap(buffer);
             }
+
+            return image;
         }
 
         public static byte[] ToByteArray(this Image image)

@@ -46,6 +46,7 @@
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.notificationControl1 = new MovieApplication.Controls.NotificationControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -53,7 +54,7 @@
             // 
             // ribbonControl1
             // 
-            this.ribbonControl1.EmptyAreaImageOptions.ImagePadding = new System.Windows.Forms.Padding(40, 46, 40, 46);
+            this.ribbonControl1.EmptyAreaImageOptions.ImagePadding = new System.Windows.Forms.Padding(51, 57, 51, 57);
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
@@ -64,10 +65,10 @@
             this.barButtonItem5,
             this.barButtonItem6});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ribbonControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.ribbonControl1.MaxItemId = 7;
             this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.OptionsMenuMinWidth = 451;
+            this.ribbonControl1.OptionsMenuMinWidth = 580;
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage3,
@@ -75,7 +76,7 @@
             this.ribbonControl1.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl1.ShowToolbarCustomizeItem = false;
-            this.ribbonControl1.Size = new System.Drawing.Size(993, 208);
+            this.ribbonControl1.Size = new System.Drawing.Size(1277, 255);
             this.ribbonControl1.StatusBar = this.ribbonStatusBar1;
             this.ribbonControl1.Toolbar.ShowCustomizeItem = false;
             this.ribbonControl1.SelectedPageChanged += new System.EventHandler(this.ribbonControl1_SelectedPageChanged);
@@ -177,11 +178,11 @@
             // 
             // ribbonStatusBar1
             // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 638);
-            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(5);
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 798);
+            this.ribbonStatusBar1.Margin = new System.Windows.Forms.Padding(6);
             this.ribbonStatusBar1.Name = "ribbonStatusBar1";
             this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(993, 38);
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1277, 47);
             // 
             // ribbonPage2
             // 
@@ -196,14 +197,15 @@
             this.navBarControl1.Appearance.GroupHeader.Options.UseForeColor = true;
             this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
-            this.navBarControl1.Location = new System.Drawing.Point(0, 208);
+            this.navBarControl1.Location = new System.Drawing.Point(0, 255);
+            this.navBarControl1.Margin = new System.Windows.Forms.Padding(4);
             this.navBarControl1.Name = "navBarControl1";
-            this.navBarControl1.OptionsNavPane.ExpandedWidth = 169;
+            this.navBarControl1.OptionsNavPane.ExpandedWidth = 217;
             this.navBarControl1.OptionsNavPane.ShowExpandButton = false;
             this.navBarControl1.OptionsNavPane.ShowOverflowPanel = false;
             this.navBarControl1.OptionsNavPane.ShowSplitter = false;
             this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(169, 430);
+            this.navBarControl1.Size = new System.Drawing.Size(217, 543);
             this.navBarControl1.TabIndex = 2;
             this.navBarControl1.SelectedLinkChanged += new DevExpress.XtraNavBar.ViewInfo.NavBarSelectedLinkChangedEventHandler(this.navBarControl1_SelectedLinkChanged);
             // 
@@ -211,27 +213,35 @@
             // 
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(169, 208);
+            this.panelControl1.Location = new System.Drawing.Point(217, 255);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(824, 430);
+            this.panelControl1.Size = new System.Drawing.Size(1060, 543);
             this.panelControl1.TabIndex = 7;
+            // 
+            // notificationControl1
+            // 
+            this.notificationControl1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 57);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 676);
+            this.ClientSize = new System.Drawing.Size(1277, 845);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.IconOptions.ShowIcon = false;
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Ribbon = this.ribbonControl1;
             this.StatusBar = this.ribbonStatusBar1;
             this.Text = "Movies Catalog";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -259,6 +269,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem4;
         private DevExpress.XtraBars.BarButtonItem barButtonItem5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private Controls.NotificationControl notificationControl1;
     }
 }
 

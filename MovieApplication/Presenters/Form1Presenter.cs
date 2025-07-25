@@ -41,7 +41,9 @@ namespace MovieApplication
         {
             view = form;
             ModulesInfo.Instance.CurrentModuleChanged += Instance_CurrentModuleChanged;
+            NotificationManager.Instance.OnNotify += Instance_OnNotify;
         }
+
 
         #region Actions
         public void ShowModule(BaseModule module)
@@ -60,6 +62,11 @@ namespace MovieApplication
         #endregion
 
         #region Subscribe application updates
+        private void Instance_OnNotify(object sender, string e)
+        {
+            view.ShowNotification(e);
+        }
+
         private void Instance_CurrentModuleChanged(object sender, BaseModule e)
         {
             if (CurrentModule != null)

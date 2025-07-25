@@ -1,10 +1,13 @@
 ﻿using DevExpress.XtraEditors;
+using MovieApplication.Modules;
+using MovieApplicationDataBase;
 using MovieApplicationDataBase.Movies;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +17,39 @@ namespace MovieApplication.Controls
 {
     public partial class MoviePhotoGalleryControl : DevExpress.XtraEditors.XtraUserControl
     {
-        public int MovieID { get; set; }
+        public int? MovieID
+        {
+            get => movieID; 
+            set
+            {
+                movieID = value; 
+                presenter.LoadImages();
+            }
+        }
 
-        private MoviesRepository _moviesRepository { get; set; }
+        private int? movieID;
+
+        private MoviePhotoGallaryControlPresenter presenter { get; set; }
 
         public MoviePhotoGalleryControl()
         {
             InitializeComponent();
-            var _moviesRepository = new MoviesRepository();
+            movieID = null;
+            presenter = new MoviePhotoGallaryControlPresenter(this);
         }
-        
-        private void LoadImages()
+
+        public void RefreshGrid()
         {
-            
+            gridControl1.DataSource = presenter.Images;
+        }
+
+        private void MoviePhotoGalleryControl_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            presenter.UploadMovieImages();
         }
     }
 }

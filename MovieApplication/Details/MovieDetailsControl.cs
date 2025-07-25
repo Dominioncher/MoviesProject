@@ -27,11 +27,8 @@ namespace MovieApplication.UserControls
         public override void InitData()
         {
             base.InitData();
-
-            _presenter = new MovieDetailsPresenter(this);
-            
+            _presenter = new MovieDetailsPresenter(this);            
             EditorsHelper.FillJanresCheckedComboBox(editGenre.Properties);
-
 
             if (Movie == null)
             {
@@ -39,13 +36,12 @@ namespace MovieApplication.UserControls
                 return;
             }
 
-            DetailsPageText = Movie.Title;
-
             editTitle.EditValue = Movie.Title;
             editDescription.EditValue = Movie.Description;
             editImage.EditValue = Movie.Image;
             editReleaseDate.EditValue = Movie.ReleaseDate;
             editGenre.EditValue = Movie.Ganres;
+            DetailsPageText = Movie.Title;
         }
 
         private void editTitle_EditValueChanged(object sender, EventArgs e)
@@ -56,13 +52,13 @@ namespace MovieApplication.UserControls
         {
             base.Save();
 
-            _presenter.Movie.ID = Movie?.ID ?? null;
             _presenter.Movie.Title = editTitle.EditValue as string;
             _presenter.Movie.Description = editDescription.EditValue as string;
             _presenter.Movie.Image = editImage.EditValue as Image;
             _presenter.Movie.ReleaseDate = editReleaseDate.EditValue as DateTime?;
             _presenter.Movie.Ganres = editGenre.EditValue as List<DBGanres>;
             _presenter.UpdateMovie();
+            DetailsPageText = _presenter.Movie.Title;
         }
 
         private void editRaiting_EditValueChanged(object sender, EventArgs e)

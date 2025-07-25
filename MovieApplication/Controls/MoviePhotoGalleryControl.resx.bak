@@ -123,27 +123,27 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="barButtonItem1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAjdEVYdFRpdGxlAEFkZDtGaWxlO0FkZEZpbGU7QmFy
-        cztSaWJib247FdyqCgAAAG5JREFUOE9j+P//PwMlGM5oaWn5jwf/g9LGeA3AB0DyfX19d9ENIcmA////
-        /0I3hCQD0DBpBiADaJhQZADFLiDdgLLl08EYBEBqy5ZPH0ADoHzCBsA04cK0NwAZIGlkgGEMA3BhogzA
-        hpEV4zIAALTKIqMeLm5pAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAI3RFWHRUaXRsZQBBZGQ7Rmls
+        ZTtBZGRGaWxlO0JhcnM7UmliYm9uOxXcqgoAAABuSURBVDhPY/j//z8DJRjOaGlp+Y8H/4PSxngNwAdA
+        8n19fXfRDSHJgP////9CN4QkA9AwaQYgA2iYUGQAxS4g3YCy5dPBGARAasuWTx9AA6B8wgbANOHCtDcA
+        GSBpZIBhDANwYaIMwIaRFeMyAAC0yiKjHi5uaQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="barButtonItem1.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAjdEVYdFRpdGxlAEFkZDtGaWxlO0FkZEZpbGU7QmFy
-        cztSaWJib247FdyqCgAAALlJREFUWEft0zEOgzAMBdCcjwNxAq+ZmTJzqkyVeggYgiwlqLItmqDEDPhL
-        f7GK/SSKSym5J8sG2mUD7bKBdtlAu2xQCgCpsR8AmAAAnxVLb/wFtAR/773fQwiTsEsHEGMUEWoAjIRQ
-        BWAoQh2AyYgNEY8AMAVRvg56ozvgot/hgKtkBLuhCqD7DWCAoYB5Xc5icNe8Lq7UAO8D5NkYwO+x2hqg
-        K0AKOXi+++b/wJ12A9SWLs81QDXgAKuejo+GhCkjAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAI3RFWHRUaXRsZQBBZGQ7Rmls
+        ZTtBZGRGaWxlO0JhcnM7UmliYm9uOxXcqgoAAAC5SURBVFhH7dMxDoMwDAXQnI8DcQKvmZkyc6pMlXoI
+        GIIsJaiyLZqgxAz4S3+xiv0kikspuSfLBtplA+2ygXbZQLtsUAoAqbEfAJgAAJ8VS2/8BbQEf++930MI
+        k7BLBxBjFBFqAIyEUAVgKEIdgMmIDRGPADAFUb4OeqM74KLf4YCrZAS7oQqg+w1ggKGAeV3OYnDXvC6u
+        1ADvA+TZGMDvsdoaoCtACjl4vvvm/8CddgPUli7PNUA14ACrno6PhoQpIwAAAABJRU5ErkJggg==
 </value>
   </data>
-  <assembly alias="DevExpress.Data.v24.2" name="DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <assembly alias="DevExpress.Data.v24.2" name="DevExpress.Data.v24.2, Version=24.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   <data name="barButtonItem2.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjIsIFZlcnNpb249MjQuMi43
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjIsIFZlcnNpb249MjQuMi42
         LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
         dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAD0DAAAC77u/
         PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi

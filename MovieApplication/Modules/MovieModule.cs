@@ -12,6 +12,7 @@ using MovieApplication.Properties;
 using MovieApplicationResources;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Ribbon;
+using MovieApplicationDataBase.Movies;
 
 namespace MovieApplication.Modules
 {
@@ -61,7 +62,6 @@ namespace MovieApplication.Modules
         {
             _presenter.ShowEditForm(advBandedGridView1.FocusedRowObject);
         }
-        #endregion
 
         private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -72,5 +72,14 @@ namespace MovieApplication.Modules
         {
             _presenter.RemoveMovie(advBandedGridView1.FocusedRowObject);
         }
+        
+        private void advBandedGridView1_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            btnRemoveMovie.Enabled = e.Row != null;
+            btnEditMovie.Enabled = e.Row != null;
+            moviePhotoGalleryControl1.MovieID = (int)((DBMovie)e.Row).ID;            
+        }
+        #endregion
+
     }
 }

@@ -32,26 +32,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoviePhotoGalleryControl));
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar2 = new DevExpress.XtraBars.Bar();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.layoutView1 = new DevExpress.XtraGrid.Views.Layout.LayoutView();
             this.layoutViewColumn1 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            this.repositoryItemImageEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageEdit();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
-            this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             this.layoutViewField_layoutViewColumn1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager1
@@ -77,44 +75,12 @@
             this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar2.OptionsBar.AllowQuickCustomization = false;
             this.bar2.OptionsBar.DrawDragBorder = false;
             this.bar2.OptionsBar.MultiLine = true;
             this.bar2.OptionsBar.UseWholeRow = true;
             this.bar2.Text = "Main menu";
-            // 
-            // barDockControlTop
-            // 
-            this.barDockControlTop.CausesValidation = false;
-            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(384, 40);
-            // 
-            // barDockControlBottom
-            // 
-            this.barDockControlBottom.CausesValidation = false;
-            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 558);
-            this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(384, 0);
-            // 
-            // barDockControlLeft
-            // 
-            this.barDockControlLeft.CausesValidation = false;
-            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
-            this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 518);
-            // 
-            // barDockControlRight
-            // 
-            this.barDockControlRight.CausesValidation = false;
-            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(384, 40);
-            this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 518);
             // 
             // barButtonItem1
             // 
@@ -124,34 +90,76 @@
             this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // barButtonItem2
             // 
+            this.barButtonItem2.Caption = "Remove";
             this.barButtonItem2.Id = 1;
             this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlTop.Size = new System.Drawing.Size(494, 49);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 698);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlBottom.Size = new System.Drawing.Size(494, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 49);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 649);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(494, 49);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 649);
+            // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 40);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.gridControl1.Location = new System.Drawing.Point(0, 49);
             this.gridControl1.MainView = this.layoutView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.MenuManager = this.barManager1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemImageEdit1,
             this.repositoryItemPictureEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(384, 518);
+            this.gridControl1.Size = new System.Drawing.Size(494, 649);
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutView1});
             // 
             // layoutView1
             // 
-            this.layoutView1.CardMinSize = new System.Drawing.Size(334, 262);
+            this.layoutView1.Appearance.ViewBackground.BackColor = System.Drawing.Color.White;
+            this.layoutView1.Appearance.ViewBackground.Options.UseBackColor = true;
+            this.layoutView1.CardMinSize = new System.Drawing.Size(429, 327);
             this.layoutView1.CardVertInterval = 3;
             this.layoutView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] {
             this.layoutViewColumn1});
+            this.layoutView1.DetailHeight = 437;
             this.layoutView1.GridControl = this.gridControl1;
             this.layoutView1.Name = "layoutView1";
             this.layoutView1.OptionsBehavior.ScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Auto;
@@ -168,22 +176,27 @@
             // 
             this.layoutViewColumn1.Caption = "Photo";
             this.layoutViewColumn1.ColumnEdit = this.repositoryItemPictureEdit1;
-            this.layoutViewColumn1.FieldName = "Photo";
+            this.layoutViewColumn1.FieldName = "Image";
             this.layoutViewColumn1.LayoutViewField = this.layoutViewField_layoutViewColumn1;
-            this.layoutViewColumn1.MinWidth = 25;
+            this.layoutViewColumn1.MinWidth = 32;
             this.layoutViewColumn1.Name = "layoutViewColumn1";
-            this.layoutViewColumn1.Width = 94;
-            // 
-            // repositoryItemImageEdit1
-            // 
-            this.repositoryItemImageEdit1.AutoHeight = false;
-            this.repositoryItemImageEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemImageEdit1.Name = "repositoryItemImageEdit1";
+            this.layoutViewColumn1.OptionsColumn.AllowEdit = false;
+            this.layoutViewColumn1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.layoutViewColumn1.OptionsFilter.AllowFilter = false;
+            this.layoutViewColumn1.Width = 121;
             // 
             // repositoryItemPictureEdit1
             // 
             this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
+            this.repositoryItemPictureEdit1.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            // 
+            // layoutViewField_layoutViewColumn1
+            // 
+            this.layoutViewField_layoutViewColumn1.EditorPreferredWidth = 399;
+            this.layoutViewField_layoutViewColumn1.Location = new System.Drawing.Point(0, 0);
+            this.layoutViewField_layoutViewColumn1.Name = "layoutViewField_layoutViewColumn1";
+            this.layoutViewField_layoutViewColumn1.Size = new System.Drawing.Size(403, 20);
+            this.layoutViewField_layoutViewColumn1.TextVisible = false;
             // 
             // layoutViewCard1
             // 
@@ -192,37 +205,30 @@
             this.layoutViewCard1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             this.layoutViewCard1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutViewField_layoutViewColumn1});
-            this.layoutViewCard1.Name = "layoutViewCard1";
+            this.layoutViewCard1.Name = "layoutViewTemplateCard";
             this.layoutViewCard1.OptionsItemText.TextToControlDistance = 5;
             this.layoutViewCard1.Text = "TemplateCard";
             this.layoutViewCard1.TextLocation = DevExpress.Utils.Locations.Bottom;
             // 
-            // layoutViewField_layoutViewColumn1
-            // 
-            this.layoutViewField_layoutViewColumn1.EditorPreferredWidth = 310;
-            this.layoutViewField_layoutViewColumn1.Location = new System.Drawing.Point(0, 0);
-            this.layoutViewField_layoutViewColumn1.Name = "layoutViewField_layoutViewColumn1";
-            this.layoutViewField_layoutViewColumn1.Size = new System.Drawing.Size(314, 242);
-            this.layoutViewField_layoutViewColumn1.TextVisible = false;
-            // 
             // MoviePhotoGalleryControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MoviePhotoGalleryControl";
-            this.Size = new System.Drawing.Size(384, 558);
+            this.Size = new System.Drawing.Size(494, 698);
+            this.Load += new System.EventHandler(this.MoviePhotoGalleryControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_layoutViewColumn1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,6 +250,5 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn1;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemImageEdit repositoryItemImageEdit1;
     }
 }

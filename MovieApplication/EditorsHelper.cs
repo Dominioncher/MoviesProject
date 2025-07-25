@@ -50,8 +50,7 @@ namespace MovieApplication
         }
 
         private static void FillComboBox<T>(RepositoryItemCheckedComboBoxEdit edit, List<T> dataSource, string DisplayMember, KeyComparer<T> comparer=null) where T : class
-        {
-
+        {           
             edit.EditValueType = EditValueTypeCollection.List;
             edit.EditValueChanging += (sender, e) =>
             {

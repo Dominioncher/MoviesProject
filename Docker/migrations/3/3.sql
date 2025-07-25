@@ -1,5 +1,5 @@
-﻿CREATE OR REPLACE VIEW VIDEO_RENT.MOVIES_VIEW 
-AS
-SELECT ID, TITLE, DESCRIPTION, PHOTO, IMAGES, LANGUAGE, RELEASE_DATE, RUN_TIME 
-FROM VIDEO_RENT.MOVIES 
-WHERE deleted_by IS NULL;
+﻿create table objects_store
+( 
+  id raw(16) default sys_guid() primary key,
+  obj BLOB
+)
