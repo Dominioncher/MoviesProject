@@ -267,7 +267,7 @@
             this.moviePhotoGalleryControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.moviePhotoGalleryControl1.Location = new System.Drawing.Point(0, 0);
             this.moviePhotoGalleryControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.moviePhotoGalleryControl1.MovieID = 0;
+            this.moviePhotoGalleryControl1.MovieID = null;
             this.moviePhotoGalleryControl1.Name = "moviePhotoGalleryControl1";
             this.moviePhotoGalleryControl1.Size = new System.Drawing.Size(537, 473);
             this.moviePhotoGalleryControl1.TabIndex = 0;

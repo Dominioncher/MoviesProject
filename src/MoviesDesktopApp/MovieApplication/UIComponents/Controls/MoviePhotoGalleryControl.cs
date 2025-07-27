@@ -22,7 +22,7 @@ namespace MovieApplication.Controls
             get => movieID; 
             set
             {
-                movieID = value; 
+                movieID = value;
                 presenter.LoadImages();
             }
         }
