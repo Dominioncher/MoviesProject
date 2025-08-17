@@ -1,4 +1,6 @@
-﻿using DataGenerator;
+﻿using AIDataGen;
+using AIDataGen.Core;
+using DataGenerator;
 using DataGenerator.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,8 @@ var host = Host.CreateDefaultBuilder()
                 services.Configure<OracleOptions>(context.Configuration.GetSection("OracleConnection"));
                 services.AddDbContext<ModelContext>((provider, options) => options.UseOracle(provider.GetRequiredService<IOptions<OracleOptions>>().Value.ConnectionString), ServiceLifetime.Singleton);
                 services.AddSingleton<App>();
+                AIGen.DownloadModels("");
+                services.AddSingleton(AIGen.GetGenerator());
             })
             .Build();
 

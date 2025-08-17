@@ -1,17 +1,14 @@
-﻿using GenAI.Attributes;
+﻿using AIDataGen.Core.Attributes;
 
 namespace DataGenerator.SyntClasses
 {
-    [Prompt("rewiew")]
+    [Prompt("Rewiews")]
     public class SyntReview
     {
-        [Prompt("author nickname")]
+        [Prompt("Author nickname")]
         public string Author { get; set; }
 
-        [Prompt("rewiew in 100 words")]
+        [Prompt("Rewiew text", "Not less 100 words")]
         public string Text { get; set; }
-
-        [Random(1,5)]
-        public int Raiting { get; set; }
     }
 }

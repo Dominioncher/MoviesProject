@@ -1,4 +1,5 @@
-﻿using DataGenerator.DB;
+﻿using AIDataGen.Core;
+using DataGenerator.DB;
 using DataGenerator.SyntClasses;
 using GenAI;
 using Newtonsoft.Json;
@@ -9,12 +10,12 @@ namespace DataGenerator
     {
         private ModelContext _context;
 
-        private AIGen _generator;
+        private Generator _generator;
 
-        public App(ModelContext context)
+        public App(ModelContext context, Generator generator)
         {
             _context = context;
-            _generator = new AIGen();
+            _generator = generator;
         }
 
         public void Run()
@@ -37,9 +38,7 @@ namespace DataGenerator
                 var dbMovie = new Movie()
                 {
                     Title = movie.Title,
-                    Description = movie.Description,
-                    ReleaseDate = movie.ReleaseDate,
-                    RunTime = movie.RunTime
+                    Description = movie.Description
                 };
                 _context.Movies.Add(dbMovie);
                 _context.SaveChanges();

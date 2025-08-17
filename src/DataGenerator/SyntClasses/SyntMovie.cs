@@ -1,28 +1,26 @@
 ﻿using SixLabors.ImageSharp;
-using GenAI.Attributes;
+using AIDataGen.Core.Attributes;
 
 namespace DataGenerator.SyntClasses
 {
-    [Prompt("movie")]
+    [Prompt("Movies")]
     public class SyntMovie
     {
-        [Prompt("movie title")]
+        [Prompt("Movie title")]
         public string Title { get; set; }
 
-        [Prompt("movie description")]
+        [Prompt("Movie description")]
         public string Description { get; set; }
 
-        [Prompt("movie ganres")]
+        [Random(1, 4)]
+        [Prompt("Movie ganres")]
         public List<string> Ganres { get; set; }
 
-        [Random("01.01.2000", "01.01.2025")]
-        public DateTime ReleaseDate { get; set; }
-
-        [Random("00:30:00", "02:00:00")]
-        public TimeSpan RunTime { get; set; }
-
+        [Prompt("Movie poster")]
         public Image Poster { get; set; }
 
+        [Random(1,5)]
+        [Prompt("Movie screenshoots")]
         public List<Image> Screenshoots { get; set; }
     }
 }
